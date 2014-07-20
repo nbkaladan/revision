@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Virtualtraining\RevisionBundle\Entity\Entrada" table="entrada">
+    <indexes>
+      <index name="id_tipo_error" columns="id_tipo_error"/>
+      <index name="id_paquete" columns="id_paquete"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="autor" type="string" column="autor" length="100" nullable="true"/>
+    <field name="error" type="string" column="error" length="200" nullable="true"/>
+    <field name="descripcion" type="string" column="descripcion" length="3000" nullable="true"/>
+    <field name="afecta" type="string" column="afecta" length="100" nullable="true"/>
+    <many-to-one field="idPaquete" target-entity="Paquete">
+      <join-columns>
+        <join-column name="id_paquete" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTipoError" target-entity="TipoError">
+      <join-columns>
+        <join-column name="id_tipo_error" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

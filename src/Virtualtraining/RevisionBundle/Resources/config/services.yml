@@ -1,0 +1,7 @@
+parameters:
+#    virtualtraining_revision.example.class: Virtualtraining\RevisionBundle\Example
+
+services:
+#    virtualtraining_revision.example:
+#        class: %virtualtraining_revision.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

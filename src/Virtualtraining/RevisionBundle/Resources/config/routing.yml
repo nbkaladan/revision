@@ -1,0 +1,3 @@
+virtualtraining_revision_homepage:
+    path:     /
+    defaults: { _controller: VirtualtrainingRevisionBundle:Default:index }

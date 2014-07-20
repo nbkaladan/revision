@@ -1,0 +1,4 @@
+virtualtraining_revision:
+    resource: "@VirtualtrainingRevisionBundle/Resources/config/routing.yml"
+    prefix:   /
+

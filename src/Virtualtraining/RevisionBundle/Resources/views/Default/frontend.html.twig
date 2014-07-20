@@ -1,0 +1,35 @@
+{# app/Resources/views/Default/frontend.html.twig #}
+{% extends '::base.html.twig' %}
+{% block stylesheets %}{% endblock %}
+{% block javascripts %}{% endblock %}
+{% block body %}
+    <aside>
+        <h2>Paquetes</h2>
+        <ul class="despliegues">
+            {% for despliegue in despliegues %}
+                <li class="despliegue">
+                    <a href="#" data-id="{{ despliegue.id }}">{{ despliegue.descripcion }}</a>
+                    <ul class="entornos">
+                        {% for entorno in entornos %}
+                            <li class="entorno">
+                                <a href="#" data-id="{{ entorno.id }}">{{ entorno.descripcion }}</a>
+                                <ul class="paquete">
+                                    {#
+                                    {% for paquete in entorno.paquetes. %}
+                                        <li class="paquete">
+                                            <a href="#" data-id="{{ paquete.id }}">{{ paquete.descripcion }}</a>
+                                        </li>
+                                    {% endfor %}
+                                    #}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </aside>
+    <article>
+      {% block article %}{% endblock %}
+    </article>
+{% endblock %}
