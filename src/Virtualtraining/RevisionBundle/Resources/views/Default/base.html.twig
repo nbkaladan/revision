@@ -11,7 +11,28 @@
     {% block body %}{% endblock %}
     <footer>
     </footer>
-    {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            {% javascripts
+                filter='?requirejs'
+                '@VirtualtrainingRevisionBundle/Resources/public/js/app.js'
+            %}
+            <script type='text/javascript'>
+/*
+                var require = {
+                    deps: [],
+                    callback: function() {
+
+                        require(['app'], function(Application) {
+                            loaded();
+                        });
+
+                    }
+                };
+*/
+            </script>
+            {{ require_js_initialize({ 'main' : asset_url, 'configure' : true })}}
+            {% endjavascripts %}
+        {% endblock %}
     </div>
 </body>
 </html>

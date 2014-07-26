@@ -34,3 +34,9 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+
+# Hearsay_Require_js
+hearsay_require_js:
+    optimizer:
+        hide_unoptimized_assets: false

@@ -1,7 +1,6 @@
 {# app/Resources/views/Default/frontend.html.twig #}
-{% extends '::base.html.twig' %}
+{% extends 'VirtualtrainingRevisionBundle:Default:base.html.twig' %}
 {% block stylesheets %}{% endblock %}
-{% block javascripts %}{% endblock %}
 {% block body %}
     <aside>
         <h2>Paquetes</h2>
@@ -32,4 +31,13 @@
     <article>
       {% block article %}{% endblock %}
     </article>
+    {% raw %}
+    <script type="text/x-handlebars-template" data-id="paquete">
+        {{#each paquete}}
+        <li class="paquete">
+            <a href="#" data-id="{{ id }}">{{ descripcion }}</a>
+        </li>
+        {{/each}}
+    </script>
+    {% endraw %}
 {% endblock %}

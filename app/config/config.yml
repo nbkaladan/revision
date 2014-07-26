@@ -33,7 +33,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [ VirtualtrainingRevisionBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -67,3 +67,23 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+# Hearsay_Require_js
+hearsay_require_js:
+  base_dir: %kernel.root_dir%/../src/Virtualtraining/RevisionBundle/Resources/public/js
+  require_js_src: lib/require.js
+  paths:
+    home: @VirtualtrainingRevisionBundle/Resources/public/js
+    thorax: @VirtualtrainingRevisionBundle/Resources/public/js/lib/thorax
+    bootstrap:  @VirtualtrainingRevisionBundle/Resources/public/js/lib/bootstrap
+  shim:
+      bootstrap:
+        deps: [ thorax ]
+        exports: bootstrap
+  optimizer:
+    #path: %kernel.root_dir%/Resources/public/js/r.js
+    path: %kernel.root_dir%/../r.js
+    hide_unoptimized_assets:  true
+    options:
+      name: home/app
