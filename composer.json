@@ -18,7 +18,10 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "hearsay/require-js-bundle": "2.0.*@dev"
+        "hearsay/require-js-bundle": "2.0.*@dev",
+        "jms/serializer-bundle": ">=0.9",
+        "friendsofsymfony/rest-bundle": "@dev",
+        "nelmio/api-doc-bundle": "@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

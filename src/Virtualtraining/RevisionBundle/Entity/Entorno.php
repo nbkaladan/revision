@@ -83,6 +83,19 @@ class Entorno
         return $this->ubicacion;
     }
 
+	/**
+	 * Set id
+	 *
+	 * @param string $id
+	 * @return Entorno
+	 */
+	public function setId($id)
+	{
+		$this->id = $id;
+
+		return $this;
+	}
+
     /**
      * Get id
      *

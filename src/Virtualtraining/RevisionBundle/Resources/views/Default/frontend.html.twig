@@ -1,43 +1,58 @@
 {# app/Resources/views/Default/frontend.html.twig #}
 {% extends 'VirtualtrainingRevisionBundle:Default:base.html.twig' %}
-{% block stylesheets %}{% endblock %}
+{% block stylesheets %}
+    {% stylesheets '@VirtualtrainingRevisionBundle/Resources/public/css/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
 {% block body %}
-    <aside>
+    <aside class="left" id="left">
         <h2>Paquetes</h2>
-        <ul class="despliegues">
-            {% for despliegue in despliegues %}
-                <li class="despliegue">
-                    <a href="#" data-id="{{ despliegue.id }}">{{ despliegue.descripcion }}</a>
-                    <ul class="entornos">
-                        {% for entorno in entornos %}
-                            <li class="entorno">
-                                <a href="#" data-id="{{ entorno.id }}">{{ entorno.descripcion }}</a>
-                                <ul class="paquete">
-                                    {#
-                                    {% for paquete in entorno.paquetes. %}
-                                        <li class="paquete">
-                                            <a href="#" data-id="{{ paquete.id }}">{{ paquete.descripcion }}</a>
-                                        </li>
-                                    {% endfor %}
-                                    #}
-                                </ul>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="accordion despliegues" id="desplieguesList">
+        </div>
     </aside>
     <article>
       {% block article %}{% endblock %}
     </article>
     {% raw %}
     <script type="text/x-handlebars-template" data-id="paquete">
-        {{#each paquete}}
-        <li class="paquete">
-            <a href="#" data-id="{{ id }}">{{ descripcion }}</a>
-        </li>
-        {{/each}}
+        <a href="#" data-id="{{ id }}">{{ descripcion }}</a>
+    </script>
+    <script type="text/x-handlebars-template" data-id="entorno">
+        <div class="accordion-heading">
+            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent=".entornosList" href="#despliegue_{{ id_despliegue }}_entorno{{ id }}" data-id="{{ id }}">{{ descripcion }}</a>
+        </div>
+        <div id='despliegue_{{ id_despliegue }}_entorno{{ id }}' class="accordion-body collapse" style='height: 0px;'>
+            <div class="accordion-inner">
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </script>
+    <script type="text/x-handlebars-template" data-id="despliegue">
+        <div class="accordion-heading">
+            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#desplieguesList" href="#despliegue{{ id }}" data-id="{{ id }}">{{ descripcion }}</a>
+        </div>
+        <div id='despliegue{{ id }}' class="accordion-body collapse" style='height: 0px;'>
+            <div class="entornosList accordion-inner">
+                <ul>
+                </ul>
+            </div>
+        </div>
     </script>
     {% endraw %}
+{% endblock %}
+{% block javascripts %}
+    {% javascripts
+    filter='?requirejs'
+    '@VirtualtrainingRevisionBundle/Resources/public/js/main.js'
+    %}
+    {{ require_js_initialize({ 'configure' : true })}}
+    <script type="text/javascript">
+        require(['home/main'],
+        function (Main){
+            App.start({% include "VirtualtrainingRevisionBundle:Default:default.json.twig" %});
+        });
+    </script>
+    {% endjavascripts %}
 {% endblock %}

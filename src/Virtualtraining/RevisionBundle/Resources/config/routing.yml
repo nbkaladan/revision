@@ -1,3 +1,15 @@
 virtualtraining_revision_homepage:
     path:     /
     defaults: { _controller: VirtualtrainingRevisionBundle:Default:index }
+
+virtualtraining_revision_rest_entrada:
+    type:     rest
+    prefix:   /api
+    resource: "Virtualtraining\RevisionBundle\Controller\EntradaController"
+    #defaults: { _format: json}
+
+virtualtraining_revision_rest_paquete:
+    type:     rest
+    prefix:   /api
+    resource: "Virtualtraining\RevisionBundle\Controller\\PaqueteController"
+    #defaults: { _format: json}

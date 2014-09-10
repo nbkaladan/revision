@@ -8,12 +8,13 @@
 //
 // 'bootstrap' does not return an object. Must appear at the end
 
-require(['thorax','bootstrap'], function(Thorax){
+define(['jquery', 'backbone', 'marionette', 'bootstrap'],
 
-    // DOM ready
-    $(document).ready(function(){
+function($, Backbone, Marionette, Bootstrap){
 
-        // Twitter Bootstrap 3 carousel plugin
-        $(".entorno").carousel();
-    });
+    'use strict';
+
+    window.App = new Backbone.Marionette.Application();
+
+    return window.App;
 });

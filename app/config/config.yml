@@ -72,18 +72,59 @@ swiftmailer:
 # Hearsay_Require_js
 hearsay_require_js:
   base_dir: %kernel.root_dir%/../src/Virtualtraining/RevisionBundle/Resources/public/js
-  require_js_src: lib/require.js
+  #require_js_src: %kernel.root_dir%/../src/Virtualtraining/RevisionBundle/Resources/views/Default/hearsay_requirejs_initialize
   paths:
     home: @VirtualtrainingRevisionBundle/Resources/public/js
-    thorax: @VirtualtrainingRevisionBundle/Resources/public/js/lib/thorax
+    jquery: @VirtualtrainingRevisionBundle/Resources/public/js/lib/jquery
+    backbone: @VirtualtrainingRevisionBundle/Resources/public/js/lib/backbone
+    marionette: @VirtualtrainingRevisionBundle/Resources/public/js/lib/backbone.marionette
+    underscore: @VirtualtrainingRevisionBundle/Resources/public/js/lib/underscore
+    json2: @VirtualtrainingRevisionBundle/Resources/public/js/lib/json2
     bootstrap:  @VirtualtrainingRevisionBundle/Resources/public/js/lib/bootstrap
+    handlebars: @VirtualtrainingRevisionBundle/Resources/public/js/lib/handlebars
+    app: @VirtualtrainingRevisionBundle/Resources/public/js/app
   shim:
       bootstrap:
-        deps: [ thorax ]
+        deps: [ jquery ]
         exports: bootstrap
+      backbone:
+        deps: [ underscore, jquery ]
+        exports: Backbone
+      marionette:
+        deps: [ jquery, underscore, backbone ]
+        exports:  Marionette
+      underscore:
+        exports: _
+      handlebars:
+        exports: Handlebars
   optimizer:
     #path: %kernel.root_dir%/Resources/public/js/r.js
     path: %kernel.root_dir%/../r.js
     hide_unoptimized_assets:  true
     options:
       name: home/app
+
+
+fos_rest:
+    param_fetcher_listener: true
+    view:
+        view_response_listener: 'force'
+        formats:
+            xml:  true
+            json: true
+        templating_formats:
+            html: true
+    format_listener:
+        rules:
+            - { path: ^/, priorities: [ json, html, xml ], fallback_format: ~, prefer_extension: true }
+    exception:
+        codes:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
+            'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
+        messages:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
+    allowed_methods_listener: true
+    access_denied_listener:
+        json: true
+    body_listener: true
+    disable_csrf_role: ROLE_API

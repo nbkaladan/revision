@@ -1,7 +1,17 @@
 parameters:
 #    virtualtraining_revision.example.class: Virtualtraining\RevisionBundle\Example
+    virtualtraining_revision.entrada.handler.class: Virtualtraining\RevisionBundle\Handler\EntradaHandler
+    virtualtraining_revision.entrada.class: Virtualtraining\RevisionBundle\Entity\Entrada
+    virtualtraining_revision.paquete.handler.class: Virtualtraining\RevisionBundle\Handler\PaqueteHandler
+    virtualtraining_revision.paquete.class: Virtualtraining\RevisionBundle\Entity\Paquete
 
 services:
 #    virtualtraining_revision.example:
 #        class: %virtualtraining_revision.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+    virtualtraining_revision.entrada.handler:
+        class: %virtualtraining_revision.entrada.handler.class%
+        arguments: [@doctrine.orm.entity_manager, %virtualtraining_revision.entrada.class%, @form.factory]
+    virtualtraining_revision.paquete.handler:
+            class: %virtualtraining_revision.paquete.handler.class%
+            arguments: [@doctrine.orm.entity_manager, %virtualtraining_revision.paquete.class%, @form.factory]

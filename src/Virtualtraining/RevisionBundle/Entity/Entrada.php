@@ -3,6 +3,7 @@
 namespace Virtualtraining\RevisionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Virtualtraining\RevisionBundle\Model\EntradaInterface;
 
 /**
  * Entrada
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="entrada", indexes={@ORM\Index(name="id_tipo_error", columns={"id_tipo_error"}), @ORM\Index(name="id_paquete", columns={"id_paquete"})})
  * @ORM\Entity
  */
-class Entrada
+class Entrada implements EntradaInterface
 {
     /**
      * @var string
@@ -57,7 +58,7 @@ class Entrada
      *   @ORM\JoinColumn(name="id_paquete", referencedColumnName="id")
      * })
      */
-    private $idPaquete;
+    protected $idPaquete;
 
     /**
      * @var \Virtualtraining\RevisionBundle\Entity\TipoError
@@ -67,7 +68,7 @@ class Entrada
      *   @ORM\JoinColumn(name="id_tipo_error", referencedColumnName="id")
      * })
      */
-    private $idTipoError;
+    protected $idTipoError;
 
 
 

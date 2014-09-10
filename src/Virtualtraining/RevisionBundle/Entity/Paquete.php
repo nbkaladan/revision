@@ -3,6 +3,7 @@
 namespace Virtualtraining\RevisionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Virtualtraining\RevisionBundle\Model\PaqueteInterface;
 
 /**
  * Paquete
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="paquete", indexes={@ORM\Index(name="id_entorno", columns={"id_entorno"})})
  * @ORM\Entity(repositoryClass="Virtualtraining\RevisionBundle\Entity\PaqueteRepository")
  */
-class Paquete
+class Paquete implements PaqueteInterface
 {
     /**
      * @var string
