@@ -14,7 +14,7 @@ function($, Backbone, Marionette, Bootstrap){
 
     'use strict';
 
-    window.App = new Backbone.Marionette.Application();
+    window.App = window.App || new Backbone.Marionette.Application();
 
     return window.App;
 });

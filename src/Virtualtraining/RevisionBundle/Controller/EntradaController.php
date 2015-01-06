@@ -139,7 +139,50 @@ class EntradaController extends FOSRestController{
 			);
 
 			$routeOptions = array(
-				'id_paquete' => $newEntrada->getIdPaquete()->getId(),
+				'id' => $newEntrada->getId(),
+				'_format' => $request->get('_format')
+			);
+
+			return $this->routeRedirectView('get_entradas', $routeOptions, Codes::HTTP_CREATED);
+
+		} catch (InvalidFormException $exception) {
+
+			return $exception->getForm();
+		}
+	}
+
+	/**
+	 * Update an Entrada from the submitted data.
+	 *
+	 * @ApiDoc(
+	 *   resource = true,
+	 *   description = "Creates a new Entrada from the submitted data.",
+	 *   input = "Virtualtraining\RevisionBundle\Form\EntradaType",
+	 *   statusCodes = {
+	 *     200 = "Returned when successful",
+	 *     400 = "Returned when the form has errors"
+	 *   }
+	 * )
+	 *
+	 * @Annotations\View(
+	 *  template = "VirtualtrainingRevisionBundle:Entrada:newEntrada.html.twig",
+	 *  statusCode = Codes::HTTP_BAD_REQUEST,
+	 *  templateVar = "form"
+	 * )
+	 *
+	 * @param $id Id of the Entrada to update
+	 * @param Request $request the request object
+	 *
+	 * @return FormTypeInterface|View
+	 */
+	public function putEntradaAction($id, Request $request){
+		try {
+			$entrada_to_update = $this->container->get('virtualtraining_revision.entrada.handler')->put(
+				$request->request->all()
+			);
+
+			$routeOptions = array(
+				'id' => $entrada_to_update->getId(),
 				'_format' => $request->get('_format')
 			);
 

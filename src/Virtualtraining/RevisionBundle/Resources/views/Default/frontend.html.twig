@@ -1,19 +1,20 @@
 {# app/Resources/views/Default/frontend.html.twig #}
 {% extends 'VirtualtrainingRevisionBundle:Default:base.html.twig' %}
 {% block stylesheets %}
-    {% stylesheets '@VirtualtrainingRevisionBundle/Resources/public/css/*' filter='cssrewrite' %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% stylesheets '@bootstrap_css' %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen"/>
     {% endstylesheets %}
 {% endblock %}
 {% block body %}
-    <aside class="left" id="left">
+    <aside class="left col-lg-2" id="left">
         <h2>Paquetes</h2>
         <div class="accordion despliegues" id="desplieguesList">
         </div>
     </aside>
-    <article>
-      {% block article %}{% endblock %}
-    </article>
+    <div class="col-lg-10">
+        <h2 class="text-center">Pruebas</h2>
+        <div id="entradas"></div>
+    </div>
     {% raw %}
     <script type="text/x-handlebars-template" data-id="paquete">
         <a href="#" data-id="{{ id }}">{{ descripcion }}</a>
@@ -40,9 +41,47 @@
             </div>
         </div>
     </script>
+    <script type="text/x-handlebars-template" data-id="entrada">
+        <div class="form-horizontal panel-body">
+            <div class="form-group">
+                <label for="autor" class="col-lg-2 control-label">Autor</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="autor"
+                           placeholder="Autor" value="{{ autor }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="error" class="col-lg-2 control-label">Error</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="error"
+                           placeholder="Error" value="{{ error }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descripcion" class="col-lg-2 control-label">Descripcion</label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" id="descripcion"
+                           placeholder="Descripcion" rows="3">{{ descripcion }}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="afecta" class="col-lg-2 control-label">Afecta</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="afecta"
+                           placeholder="Afecta" value="{{ afecta }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="button" class="center-block">Guardar</button>
+            </div>
+        </div>
+    </script>
     {% endraw %}
 {% endblock %}
 {% block javascripts %}
+    {% javascripts '@jquery_js' '@bootstrap_js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     {% javascripts
     filter='?requirejs'
     '@VirtualtrainingRevisionBundle/Resources/public/js/main.js'

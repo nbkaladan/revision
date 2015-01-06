@@ -5,10 +5,12 @@ define(['app'
         ,'home/views/App.EntornoView'
         ,'home/entities/App.Paquete'
         ,'home/views/App.PaqueteView'
+        ,'home/entities/App.Entrada'
+        ,'home/views/App.EntradaView'
         ,'marionette'
 ],
 
-function(App, DespliegueEntity, DespliegueView, EntornoEntity, EntornoView, PaqueteEntity, PaqueteView, Marionette){
+function(App, DespliegueEntity, DespliegueView, EntornoEntity, EntornoView, PaqueteEntity, PaqueteView, EntradaEntity, EntradaView, Marionette){
     'use strict';
 
     App.module('Revision', function(Revision, App, Backbone){
@@ -39,23 +41,17 @@ function(App, DespliegueEntity, DespliegueView, EntornoEntity, EntornoView, Paqu
                 App.despliegue.show(this.desplieguesV);
             },
             showEntradas: function (model){
-                this.entradas = new EntradasEntity.Collection({
-                    url: 'api/paquetes/'+model.get('id')+'/entradas'
-
-                });
-
-                $.ajax({
-                    context: this,
-                    type: 'GET',
-                    url: 'api/paquetes/'+model.get('id')+'/entradas',
-                    dataType: 'json',
-                    success: function(data, textStatus, errorThrown){
-                        console.log(data);
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        this.model.set($.parseJSON(jqXHR.responseText)); // TODO Handle edge cases of network problem and responseText = null
+                this.entradas = new EntradaEntity.Collection();
+                this.entradas.fetch({
+                        url: 'api/paquetes/'+model.get('id')+'/entradas.json'
+                    },{
+                        parse: true
                     }
+                );
+                this.entradasV = new EntradaView.CollectionView({
+                   collection: this.entradas
                 });
+                App.entradas.show(this.entradasV);
             }
         });
 
