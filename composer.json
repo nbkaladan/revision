@@ -21,7 +21,9 @@
         "hearsay/require-js-bundle": "2.0.*@dev",
         "jms/serializer-bundle": ">=0.9",
         "friendsofsymfony/rest-bundle": "@dev",
-        "nelmio/api-doc-bundle": "@dev"
+        "nelmio/api-doc-bundle": "@dev",
+        "leafo/lessphp": "*",
+        "twitter/bootstrap": "*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
